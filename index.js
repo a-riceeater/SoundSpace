@@ -8,6 +8,8 @@ app.use(express.static("public"));
 app.use(express.json());
 
 const userStatus = new Map();
+const rooms = new Map();
+const usernames = new Map();
 
 const path = require("path");
 function rp(p) {
@@ -29,7 +31,14 @@ io.on('connection', (socket) => {
   socket.join("voice");
 
   userStatus.set(socket.id, "connected");
-  io.emit("recieve-join", { user: socket.id })
+
+  socket.on("join", (data) => {
+    if (data.room.replaceAll(" ", "") == "" || data.user.replaceAll(" ", "") == "") return;
+    socket.join(data.room);
+    rooms.set(socket.id, data.room)
+    io.to(data.room).emit("recieve-join", { user: data.user })
+    usernames.set(socket.id, data.user)
+  })
 
   socket.on("send-voice", function (data) {
 
@@ -38,10 +47,11 @@ io.on('connection', (socket) => {
     newData = newData[0] + newData[1];
 
     if (userStatus.get(socket.id) == "mute") return;
-    socket.broadcast.emit("recieve-voice", { audio: newData });
+    io.to(rooms.get(socket.id)).emit("recieve-voice", { audio: newData, user: usernames.get(socket.id) });
   });
 
   socket.on("disconnect", () => {
     userStatus.delete(socket.id);
+    rooms.delete(socket.id);
   })
 })

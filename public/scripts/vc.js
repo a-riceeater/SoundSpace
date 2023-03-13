@@ -2,10 +2,11 @@
 const socket = io();
 const userStatus = {
     muted: false,
-    deaf: false
+    deaf: false,
+    username: ''
 };
 
-function mainFunction(time) {
+function voice(time) {
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
         var madiaRecorder = new MediaRecorder(stream);
         madiaRecorder.start();
@@ -46,19 +47,30 @@ function mainFunction(time) {
 
 }
 
-mainFunction(1000)
-
+voice(500)
 
 socket.on("recieve-voice", (data) => {
     if (userStatus.deaf) return;
+    console.log(data);
+
+    _(".dft-user", true).forEach(ele => {
+        if (ele.getAttribute("data-user") == data.user) {
+            ele.style.border = "5px solid green"
+            setTimeout(() => {
+                ele.style.border = "5px solid transparent"
+            }, 500)
+        }
+    })
+    if (data.user == userStatus.username) return;
     var audio = new Audio(data.audio);
     audio.play();
 });
 
 socket.on("recieve-join", (data) => {
-    const user = document.createElement("div");
+    const user = document.createElement("button");
     user.classList.add("dft-user")
-    user.innerText = data.user;
+    user.innerHTML = data.user.slice(0, 5);
+    user.setAttribute("data-user", data.user);
     _("#usersPfps").appendChild(user);
 })
 
@@ -66,7 +78,6 @@ socket.on("recieve-join", (data) => {
 _("#muteBtn").addEventListener("click", (e) => {
     e.preventDefault();
     const ele = _("#muteBtn");
-    console.log(ele.src)
     if (ele.src.includes("unmute")) {
         ele.src = "assets/mute.png"
         ele.style.marginBottom = "0"
@@ -83,7 +94,6 @@ _("#muteBtn").addEventListener("click", (e) => {
 _("#deafenBtn").addEventListener("click", (e) => {
     e.preventDefault();
     const ele = _("#deafenBtn")
-    console.log(ele.src)
     if (ele.src.includes("undeafen")) {
         ele.src = "assets/deafen.png"
         userStatus.deaf = false;
@@ -92,3 +102,16 @@ _("#deafenBtn").addEventListener("click", (e) => {
         userStatus.deaf = true;
     }
 });
+
+// Join rooms
+_("#connectToRoomBtn").addEventListener("click", (e) => {
+    const room = _("#roomName").value;
+    const username = _("#username").value;
+    if (room.replaceAll(" ", "") == "" || username.replaceAll(" ", "") == "") return;
+    _(".dft-user", true).forEach(ele => ele.remove());
+    socket.emit("join", { room: room, user: username })
+    userStatus.username = username;
+    _("#currentRoom").iText(room);
+    _("#username").value = '';
+    _("#roomName").value = '';
+})

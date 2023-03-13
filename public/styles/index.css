@@ -11,22 +11,12 @@ body {
     background-color: var(--dark);
 }
 
-#friends {
+#joinRooms {
     position: fixed;
+    bottom: 0%;
     left: 0%;
-    width: 50%;
-    bottom: 0%;
+    width: 100%;
     height: calc(100% - 40%);
-    border-right: 2px solid var(--mid);
-}
-
-#public {
-    position: fixed;
-    right: 0%;
-    width: 50%;
-    bottom: 0%;
-    height: calc(100% - 40%);
-    border-left: 2px solid var(--mid);
 }
 
 h1 {
@@ -34,12 +24,17 @@ h1 {
 }
 
 .dft-user {
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     border-radius: 100%;
     color: white;
     background-color: var(--mid);
     font-size: 17px;
+    text-align: center;
+    border: none;
+    font-family: var(--dmsans);
+    margin-right: 10px;
+    border: 5px solid transparent;
 }
 
 #voice-controls {
@@ -53,4 +48,25 @@ h1 {
 .vcBtn {
     cursor: pointer;
     vertical-align: middle;
+}
+
+#connectToRoomBtn {
+    font-family: var(--dmsans);
+    background-color: var(--dark);
+    border: 1px solid var(--dark);
+    color: white;
+    height: 50px;
+    width: 150px;
+    font-size: 17px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+input {
+    font-family: var(--dmsans);
+    height: 30px;
+    width: 200px;
+    padding-left: 8px;
+    font-size: 15px;
+    outline: 0;
 }

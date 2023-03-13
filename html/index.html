@@ -12,6 +12,7 @@
 </head>
 <body>
     <div id="currentVoice">
+        <h1 id="currentRoom" style="margin-left: 30px;"></h1>
         <div class="tc cc" id="usersPfps">
         </div>
         <div id="voice-controls">
@@ -19,15 +20,17 @@
                 <img src="assets/deafen.png" alt="deafen" height="75px" width="100px" class="middle cp" id="deafenBtn">
         </div>
     </div>
-    <div id="friends">
-        <div class="cc tc">
-            <h1 class="cp">Friends</h1>
-        </div>
+    <div id="joinRooms" class="tc">
+        <br><br>
+        <h1>Join a room</h1>
+        <br><br>
+        <input type="text" id="roomName" placeholder="Room Name">
+        <br><br>
+        <input type="text" id="username" placeholder="Username">
+        <br>
+        <br>
+        <button id="connectToRoomBtn">Connect</button>
     </div>
-    <div id="public">
-        <div class="cc tc">
-            <h1 class="cp">Join a Room</h1>
-        </div>
     </div>
     <script src="scripts/vc.js"></script>
 </body>
