@@ -49,11 +49,18 @@ function mainFunction(time) {
 mainFunction(1000)
 
 
-socket.on("recieve-voice", function (data) {
+socket.on("recieve-voice", (data) => {
     if (userStatus.deaf) return;
     var audio = new Audio(data.audio);
     audio.play();
 });
+
+socket.on("recieve-join", (data) => {
+    const user = document.createElement("div");
+    user.classList.add("dft-user")
+    user.innerText = data.user;
+    _("#usersPfps").appendChild(user);
+})
 
 // Voice controls
 _("#muteBtn").addEventListener("click", (e) => {

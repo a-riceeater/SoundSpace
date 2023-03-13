@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
   socket.join("voice");
 
   userStatus.set(socket.id, "connected");
+  io.emit("recieve-join", { user: socket.id })
 
   socket.on("send-voice", function (data) {
 

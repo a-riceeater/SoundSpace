@@ -33,10 +33,13 @@ h1 {
     font-family: var(--dmsans);
 }
 
-.dft-pfp {
+.dft-user {
     height: 100px;
     width: 100px;
     border-radius: 100%;
+    color: white;
+    background-color: var(--mid);
+    font-size: 17px;
 }
 
 #voice-controls {
