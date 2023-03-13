@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SoundSpace</title>
+    <script src="scripts/socket.io.js"></script>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="scripts/forge.js"></script>
 </head>
 <body>
-    
+    <div id="currentVoice">
+        <div class="tc cc">
+            <img src="assets/bob.jpg" alt="bob" class="dft-pfp cp">
+        </div>
+        <div id="voice-controls">
+            <img src="assets/mute.png" alt="mute" id="muteBtn" class="vcBtn" height="100px" width="75px">
+        </div>
+    </div>
+    <div id="friends">
+        <div class="cc tc">
+            <h1 class="cp">Friends</h1>
+        </div>
+    </div>
+    <div id="public">
+        <div class="cc tc">
+            <h1 class="cp">Join a Room</h1>
+        </div>
+    </div>
+    <script src="scripts/vc.js"></script>
 </body>
 </html>
