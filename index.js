@@ -24,3 +24,7 @@ server.listen(port, () => {
   console.log("\x1b[31mThis is a development server, do not use this for hosting!\n")
   console.log(`\x1b[0mRunning on:\nhttp://localhost${port == 80 ? "" : ":" + port}`)
 })
+
+io.on('connection', (socket) => {
+  socket.join("voice");
+})
