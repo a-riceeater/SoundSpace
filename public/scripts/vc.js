@@ -24,7 +24,7 @@ function mainFunction(time) {
             var fileReader = new FileReader();
             fileReader.readAsDataURL(audioBlob);
             fileReader.onloadend = function () {
-                // if (!userStatus.microphone || !userStatus.online) return;
+                if (userStatus.muted) return;
 
                 var base64String = fileReader.result;
                 socket.emit("send-voice", base64String);
@@ -50,6 +50,7 @@ mainFunction(1000)
 
 
 socket.on("recieve-voice", function (data) {
+    if (userStatus.deaf) return;
     var audio = new Audio(data.audio);
     audio.play();
 });
@@ -71,3 +72,16 @@ _("#muteBtn").addEventListener("click", (e) => {
         userStatus.muted = true;
     }
 })
+
+_("#deafenBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    const ele = _("#deafenBtn")
+    console.log(ele.src)
+    if (ele.src.includes("undeafen")) {
+        ele.src = "assets/deafen.png"
+        userStatus.deaf = false;
+    } else {
+        ele.src = "assets/undeafen.png"
+        userStatus.deaf = true;
+    }
+});
