@@ -11,11 +11,11 @@ const userStatus = new Map();
 
 const path = require("path");
 function rp(p) {
-    return path.join(__dirname, p);
+  return path.join(__dirname, p);
 }
 
 app.get("/", (req, res) => {
-    res.sendFile(rp("html/index.html"))
+  res.sendFile(rp("html/index.html"))
 })
 
 const port = process.env.PORT;
@@ -27,4 +27,20 @@ server.listen(port, () => {
 
 io.on('connection', (socket) => {
   socket.join("voice");
+
+  userStatus.set(socket.id, "connected");
+
+  socket.on("send-voice", function (data) {
+
+    var newData = data.split(";");
+    newData[0] = "data:audio/ogg;";
+    newData = newData[0] + newData[1];
+
+    if (userStatus.get(socket.id) == "mute") return;
+    socket.broadcast.emit("recieve-voice", { audio: newData });
+  });
+
+  socket.on("disconnect", () => {
+    userStatus.delete(socket.id);
+  })
 })
