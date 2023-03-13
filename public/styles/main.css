@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+@import url("https://fonts.googleapis.com/css?family=Noto%20Sans");
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+@import url("https://fonts.googleapis.com/css?family=Lato");
+@import url("https://fonts.googleapis.com/css?family=Yanone Kaffeesatz");
+@import url("https://fonts.googleapis.com/css?family=Gajraj One");
+@import url("https://fonts.googleapis.com/css?family=DM Sans");
+
+:root {
+    --dark: #5465FF;
+    --mid: #788BFF;
+    --light: #9BB1FF;
+
+    --poppins: 'Poppins', serif;
+    --raleway: 'Raleway', serif;
+    --notosans: 'Noto Sans', serif;
+    --lato: 'Lato', serif;
+    --bigTfont: 'Gajraj One', serif;
+    --yF: 'Yanone Kaffeesatz', serif;
+    --dmsans: 'DM Sans', serif;
+}
+
+.cc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tc {
+    text-align: center;
+}
+
+.cp {
+    cursor: pointer;
+}

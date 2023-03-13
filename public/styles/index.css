@@ -1,0 +1,53 @@
+body {
+    background-color: var(--light);
+}
+
+#currentVoice {
+    width: 100%;
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    height: 40%;
+    background-color: var(--dark);
+}
+
+#friends {
+    position: fixed;
+    left: 0%;
+    width: 50%;
+    bottom: 0%;
+    height: calc(100% - 40%);
+    border-right: 2px solid var(--mid);
+}
+
+#public {
+    position: fixed;
+    right: 0%;
+    width: 50%;
+    bottom: 0%;
+    height: calc(100% - 40%);
+    border-left: 2px solid var(--mid);
+}
+
+h1 {
+    font-family: var(--dmsans);
+}
+
+.dft-pfp {
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+}
+
+#voice-controls {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    width: 100%;
+    text-align: center;
+}
+
+.vcBtn {
+    cursor: pointer;
+    vertical-align: middle;
+}
