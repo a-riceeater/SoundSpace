@@ -50,7 +50,7 @@ function voice(time) {
 voice(500)
 
 socket.on("recieve-voice", (data) => {
-    if (userStatus.deaf) return;
+    if (userStatus.deaf || data.user == userStatus.username) return;
     console.log(data);
 
     _(".dft-user", true).forEach(ele => {
@@ -61,7 +61,7 @@ socket.on("recieve-voice", (data) => {
             }, 500)
         }
     })
-    if (data.user == userStatus.username) return;
+
     var audio = new Audio(data.audio);
     audio.play();
 });
